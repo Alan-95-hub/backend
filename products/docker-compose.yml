@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13.3
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=alan
+      - POSTGRES_USER=alan
+      - POSTGRES_PASSWORD=alan
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    ports:
+      - 5432:5432
+    restart: always
+  web:
+    build: .
+    ports:
+      - 80:8000
+    depends_on:
+      - db
+
+
+volumes:
+  postgres:
